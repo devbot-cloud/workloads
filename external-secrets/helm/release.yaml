@@ -23,10 +23,10 @@ spec:
     createNamespace: true
   chart:
     spec:
-      chart: external-secrets
+      chart: external-secrets-operator
       sourceRef:
         kind: HelmRepository
-        name: external-secrets-operator
+        name: external-secrets
         namespace: flux-system
       version: ${EXTERNAL_SECRETS_VERSION:=8.5.5}
   timeout: 1m0s
