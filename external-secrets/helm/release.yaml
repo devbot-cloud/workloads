@@ -25,7 +25,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: external-secrets
-        namespace: ${FLUX_SOURCE_NS:=flux-sources}
+        namespace: flux-system
       version: ${EXTERNAL_SECRETS_VERSION:=8.5.5}
   timeout: 1m0s
   upgrade:
