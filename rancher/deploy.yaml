@@ -47,9 +47,9 @@ spec:
       namespace: ${CLUSTER_NAME:=flux-system}   # <--- The Namespace of the flux source to use
   postBuild:
     substituteFrom:
-      - kind: ConfigMap
-        name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
-        optional: true
+      # - kind: ConfigMap
+      #   name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
+      #   optional: true
       - kind: ConfigMap
         name: cluster-env
 ---
@@ -83,8 +83,8 @@ spec:
     namespace: flux-system # <--- The Namespace of the flux source to use
   postBuild:
     substituteFrom:
-      - kind: ConfigMap
-        name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
-        optional: true
+      # - kind: ConfigMap
+      #   name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
+      #   optional: true
       - kind: ConfigMap
         name: cluster-env
