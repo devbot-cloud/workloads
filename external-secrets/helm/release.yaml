@@ -23,7 +23,7 @@ spec:
     createNamespace: true
   chart:
     spec:
-      chart: external-secrets-operator
+      chart: kubernetes-external-secrets
       sourceRef:
         kind: HelmRepository
         name: external-secrets
