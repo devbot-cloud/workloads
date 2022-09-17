@@ -45,6 +45,13 @@ spec:
       kind: HelmRelease
       name: external-secrets
       namespace: ${CLUSTER_NAME:=flux-system}
+  postBuild:
+    substituteFrom:
+      # - kind: ConfigMap
+      #   name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
+      #   optional: true
+      - kind: ConfigMap
+        name: cluster-env
 ---
 #------------------------------------------------
 # Flux will use this kustomize to deploy the yaml for external-secrets 
@@ -74,3 +81,10 @@ spec:
     namespace: flux-system
   validation: server
   timeout: 60s
+  postBuild:
+    substituteFrom:
+      # - kind: ConfigMap
+      #   name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
+      #   optional: true
+      - kind: ConfigMap
+        name: cluster-env
