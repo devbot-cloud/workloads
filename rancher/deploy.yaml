@@ -64,9 +64,9 @@ metadata:
 spec:
 # -------------
 # The Kubeconfig Used to by kustomize to applied the manifest generated
-  kubeConfig:
-    secretRef:
-      name: ${CLUSTER_NAME}-kubeconfig  # <--- The remote kubeconfig to use to apply the manifest
+  # kubeConfig:
+  #   secretRef:
+  #     name: ${CLUSTER_NAME}-kubeconfig  # <--- The remote kubeconfig to use to apply the manifest
 # -------------
   dependsOn:
     - name: rancher    # <---- Depend on the Rancher helm release to be installed first

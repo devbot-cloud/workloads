@@ -26,7 +26,7 @@ spec:
       chart: external-secrets
       sourceRef:
         kind: HelmRepository
-        name: external-secrets
+        name: external-secrets-operator
         namespace: flux-system
       version: ${EXTERNAL_SECRETS_VERSION:=8.5.5}
   timeout: 1m0s
