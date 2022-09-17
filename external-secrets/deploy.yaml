@@ -16,6 +16,11 @@ spec:
     name: flux-system
   timeout: 60s
   url: ssh://git@github.com:devbot-cloud/workloads.git
+  ignore: |
+    # Exclude Everything
+    /*
+    # include external-secrets
+    !/external-secrets/
 ---
 #------------------------------------------------
 # Flux will use this kustomize to deploy the helm release external-secrets 
