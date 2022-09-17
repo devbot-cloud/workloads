@@ -1,0 +1,85 @@
+#------------------------------------------------
+# The Git source flux will use for rancher
+# (Itself)
+#------------------------------------------------
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: rancher-git
+  namespace: ${FLUX_SOURCE_NS:=flux-sources}
+spec:
+  gitImplementation: go-git
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: flux-system
+  timeout: 60s
+  url: ssh://git@github.com:devbot-cloud/workloads.git
+---
+#------------------------------------------------
+# Flux will use this kustomize to deploy the helm release rancher
+#------------------------------------------------
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: rancher
+  namespace: ${CLUSTER_NAME:=flux-system}
+spec:
+  interval: 1m0s
+  path: ./rancher/helm
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: rancher-git
+    namespace: ${FLUX_SOURCE_NS:=flux-sources}
+  validation: server
+  timeout: 2m
+  healthChecks: # <--- Perform health checks on the helm release
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: rancher
+      namespace: ${CLUSTER_NAME:=flux-system}   # <--- The Namespace of the flux source to use
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
+        optional: true
+      - kind: ConfigMap
+        name: cluster-env
+---
+#------------------------------------------------
+# Flux will use this kustomize to deploy the yaml for external-secrets 
+#------------------------------------------------
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: rancher-yaml
+  namespace: ${CLUSTER_NAME:=flux-system}
+spec:
+# -------------
+# The Kubeconfig Used to by kustomize to applied the manifest generated
+  kubeConfig:
+    secretRef:
+      name: ${CLUSTER_NAME}-kubeconfig  # <--- The remote kubeconfig to use to apply the manifest
+# -------------
+  dependsOn:
+    - name: rancher    # <---- Depend on the Rancher helm release to be installed first
+      namespace: ${CLUSTER_NAME:=flux-system}
+  interval: 1m0s
+  path: ./rancher/yaml
+  prune: true
+  wait: true
+  validation: server
+  timeout: 2m
+  sourceRef:
+    kind: GitRepository
+    name: rancher-git
+    namespace: ${FLUX_SOURCE_NS:=flux-sources} # <--- The Namespace of the flux source to use
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: workload-versions  # Use this ConfigMap if it exists, but proceed if it doesn't.
+        optional: true
+      - kind: ConfigMap
+        name: cluster-env
