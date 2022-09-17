@@ -15,7 +15,7 @@ spec:
   secretRef:
     name: flux-system
   timeout: 60s
-  url: https://github.com/devbot-cloud/workloads
+  url: ssh://git@github.com/devbot-cloud/workloads.git
   ignore: |
     # Exclude Everything
     /*
