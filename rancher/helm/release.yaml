@@ -36,7 +36,7 @@ spec:
     privateCA: true
     replicas: 3
     useBundledSystemChart: true
-    bootstrapPassword: {RANCHER_PASSWORD:=admin}
+    bootstrapPassword: ${RANCHER_PASSWORD:=admin}
 # -------------
 # This allows us to use the values.yaml file in the helm chart 
 # This configmap can be created in each clusters namespace 
