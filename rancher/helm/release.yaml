@@ -12,9 +12,9 @@ metadata:
 spec:
 # -------------
 # The Kubeconfig Used to by HelmRelease to install the helm chart
-  kubeConfig:
-    secretRef:
-      name: ${CLUSTER_NAME}-kubeconfig  # <--- The remote kubeconfig to use to apply the manifest
+  # kubeConfig:
+  #   secretRef:
+  #     name: ${CLUSTER_NAME}-kubeconfig  # <--- The remote kubeconfig to use to apply the manifest
 # -------------
   releaseName: rancher            # <- This will be the name of the helm release on the remote cluster
   targetNamespace: cattle-system  # <- This will be the namespace the helm release will be installed into on the remote cluster
