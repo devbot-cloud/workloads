@@ -28,11 +28,6 @@ spec:
         namespace: flux-system
       version: ${RANCHER_VERSION:=2.6.8}
   timeout: 1m0s
-  upgrade:
-    remediation:
-      retries: 1
-      retryInterval: 1m0s
-  wait: true
   values:
     hostname: ${CLUSTER_FQDN}  # <- This is the FQDN of the cluster
     ingress:

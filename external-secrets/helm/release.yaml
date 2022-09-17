@@ -28,13 +28,6 @@ spec:
         namespace: flux-system
       version: ${EXTERNAL_SECRETS_VERSION:=8.5.5}
   timeout: 1m0s
-  upgrade:
-    remediation:
-      retries: 1
-      retryInterval: 1m0s
-    strategy:
-      type: Recreate
-  wait: true
 # -------------
 # This allows us to use the values.yaml file in the helm chart 
 # This configmap can be created in each clusters namespace 
