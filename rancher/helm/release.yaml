@@ -9,6 +9,8 @@ kind: HelmRelease
 metadata:
   name: rancher
   namespace: ${CLUSTER_NAME:=flux-system}
+  annotations:
+    remote-flux/RemoteEnabled: "true" # <--- This is the annotation that enables downstream clusters to use this helm release
 spec:
 # -------------
 # The Kubeconfig Used to by HelmRelease to install the helm chart
