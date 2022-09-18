@@ -2,7 +2,7 @@
 # This is the Helm Source for the application external secrets
 # Flux will use this to install the helm chart for external secrets
 #------------------------------------------------
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: rancher
@@ -10,4 +10,4 @@ metadata:
 spec:
   interval: 1m0s
   url: https://releases.rancher.com/server-charts/stable  # <- This is the URL to the helm Repository
-  timeout: 60s
+  timeout: 10s

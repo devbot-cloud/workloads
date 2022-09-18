@@ -2,7 +2,7 @@
 # The Git source flux will use for rancher
 # (Itself)
 #------------------------------------------------
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: rancher-git
@@ -14,7 +14,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  timeout: 60s
+  timeout: 10s
   url: ssh://git@github.com/devbot-cloud/workloads.git
   ignore: |
     # Exclude Everything

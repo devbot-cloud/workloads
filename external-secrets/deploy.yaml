@@ -2,7 +2,7 @@
 # The Git source flux will use for external-secrets
 # (Itself)
 #------------------------------------------------
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: external-secrets-git
@@ -14,7 +14,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  timeout: 60s
+  timeout: 10s
   url: ssh://git@github.com/devbot-cloud/workloads.git
   ignore: |
     # Exclude Everything
@@ -80,7 +80,7 @@ spec:
     name: external-secrets-git
     namespace: flux-system
   validation: server
-  timeout: 60s
+  timeout: 10s
   postBuild:
     substituteFrom:
       # - kind: ConfigMap
