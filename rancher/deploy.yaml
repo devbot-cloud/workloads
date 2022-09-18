@@ -55,7 +55,6 @@ spec:
       - kind: ConfigMap
         name: cluster-env
   suspend: true # <--- Pause the reconciliation for testing
-  
 ---
 #------------------------------------------------
 # Flux will use this kustomize to deploy the yaml for external-secrets 
@@ -66,7 +65,7 @@ metadata:
   name: rancher-yaml
   namespace: ${CLUSTER_NAME:=flux-system}
   annotations:
-    remote-flux/RemoteEnabled: true # <--- This is the annotation that enables downstream clusters to use this kustomization
+    remote-flux/RemoteEnabled: "true" # <--- This is the annotation that enables downstream clusters to use this kustomization
 spec:
 # -------------
 # The Kubeconfig Used to by kustomize to applied the manifest generated
