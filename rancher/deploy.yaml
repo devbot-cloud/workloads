@@ -54,7 +54,7 @@ spec:
         optional: true
       - kind: ConfigMap
         name: cluster-env
-  suspend: true # <--- Pause the reconciliation for testing
+  # suspend: true # <--- Pause the reconciliation for testing
 ---
 #------------------------------------------------
 # Flux will use this kustomize to deploy the yaml for external-secrets 
